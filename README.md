@@ -6,15 +6,15 @@
 
 
 ## TODO Arduino
--[ ] Implement Data collection for temp sensor (Ben)
+- [ ] Implement Data collection for temp sensor (Ben)
 
 
 ## TODO Android
--[ ] Get rid of white space on top and fix scrolling (Carter)
--[ ] Fix text box click out of (Carter)
+- [ ] Get rid of white space on top and fix scrolling (Carter)
+- [ ] Fix text box click out of (Carter)
 
--[ ] Implement Graphing Library (Luke)
--[ ] Create Data Structures for Sensor Data (Carter)
--[ ] Implement FitBit Data Collection (Ben)
+- [ ] Implement Graphing Library (Luke)
+- [ ] Create Data Structures for Sensor Data (Carter)
+- [ ] Implement FitBit Data Collection (Ben)
 
 
