@@ -1,6 +1,20 @@
 <resources>
     <string name="app_name">Pillow_Companion</string>
-    <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_insights">Insights</string>
+    <string name="title_settings">Settings</string>
+    <string name="batterySaver">Batter Saver</string>
+    <string name="blank" />
+    <string name="connections">Connections</string>
+    <string name="reset">Reset</string>
+    <string name="sensor_rates">Sensor Rates</string>
+    <string name="light">Light</string>
+    <string name="temp">Temp</string>
+    <string name="emg">EMG</string>
+    <string name="acc">Acc</string>
+    <string name="ecg">ECG</string>
+    <string name="personal_info">Personal Information</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="age">Age</string>
 </resources>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/battery_saver_switch"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/scoll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Spinner
+                android:id="@+id/temp_rates_spinner"
+                android:layout_width="246dp"
+                android:layout_height="25dp"
+                app:layout_constraintBottom_toBottomOf="@+id/temp_text"
+                app:layout_constraintEnd_toEndOf="@+id/light_rates_spinner"
+                app:layout_constraintTop_toTopOf="@+id/temp_text" />
+
+            <TextView
+                android:id="@+id/height_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/height"
+                app:layout_constraintStart_toStartOf="@+id/personal_info_text"
+                app:layout_constraintTop_toBottomOf="@+id/personal_info_text" />
+
+            <TextView
+                android:id="@+id/ecg_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/ecg"
+                app:layout_constraintStart_toStartOf="@+id/acc_text"
+                app:layout_constraintTop_toBottomOf="@+id/acc_text" />
+
+            <Spinner
+                android:id="@+id/light_rates_spinner"
+                android:layout_width="246dp"
+                android:layout_height="25dp"
+                app:layout_constraintBottom_toBottomOf="@+id/light_text"
+                app:layout_constraintEnd_toEndOf="@+id/connections_reset_button"
+                app:layout_constraintTop_toTopOf="@+id/light_text" />
+
+            <Button
+                android:id="@+id/connections_reset_button"
+                android:layout_width="86dp"
+                android:layout_height="43dp"
+                android:layout_marginEnd="25dp"
+                android:text="@string/reset"
+                app:layout_constraintBottom_toBottomOf="@+id/connections_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/connections_text" />
+
+            <TextView
+                android:id="@+id/personal_info_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="@string/personal_info"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/ecg_text"
+                app:layout_constraintTop_toBottomOf="@+id/ecg_text" />
+
+            <TextView
+                android:id="@+id/light_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/light"
+                app:layout_constraintStart_toStartOf="@+id/sensor_rates_text"
+                app:layout_constraintTop_toBottomOf="@+id/sensor_rates_text" />
+
+            <TextView
+                android:id="@+id/connections_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/connections"
+                app:layout_constraintStart_toStartOf="@+id/battery_saver_text"
+                app:layout_constraintTop_toBottomOf="@+id/battery_saver_text" />
+
+            <Spinner
+                android:id="@+id/acc_rate_spinner"
+                android:layout_width="246dp"
+                android:layout_height="25dp"
+                app:layout_constraintBottom_toBottomOf="@+id/acc_text"
+                app:layout_constraintEnd_toEndOf="@+id/emg_rates_spinner"
+                app:layout_constraintTop_toTopOf="@+id/acc_text" />
+
+            <TextView
+                android:id="@+id/sensor_rates_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="@string/sensor_rates"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/connections_text"
+                app:layout_constraintTop_toBottomOf="@+id/connections_text" />
+
+            <TextView
+                android:id="@+id/age_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/age"
+                app:layout_constraintStart_toStartOf="@+id/weight_text"
+                app:layout_constraintTop_toBottomOf="@+id/weight_text" />
+
+            <Spinner
+                android:id="@+id/ecg_rate_spinner"
+                android:layout_width="246dp"
+                android:layout_height="25dp"
+                app:layout_constraintBottom_toBottomOf="@+id/ecg_text"
+                app:layout_constraintEnd_toEndOf="@+id/acc_rate_spinner"
+                app:layout_constraintTop_toTopOf="@+id/ecg_text" />
+
+            <Spinner
+                android:id="@+id/emg_rates_spinner"
+                android:layout_width="246dp"
+                android:layout_height="25dp"
+                app:layout_constraintBottom_toBottomOf="@+id/emg_text"
+                app:layout_constraintEnd_toEndOf="@+id/temp_rates_spinner"
+                app:layout_constraintTop_toTopOf="@+id/emg_text" />
+
+            <TextView
+                android:id="@+id/weight_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/weight"
+                app:layout_constraintStart_toStartOf="@+id/height_text"
+                app:layout_constraintTop_toBottomOf="@+id/height_text" />
+
+            <TextView
+                android:id="@+id/temp_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/temp"
+                app:layout_constraintStart_toStartOf="@+id/light_text"
+                app:layout_constraintTop_toBottomOf="@+id/light_text" />
+
+            <EditText
+                android:id="@+id/weight_text_box"
+                android:layout_width="232dp"
+                android:layout_height="24dp"
+                android:ems="10"
+                android:inputType="number"
+                app:layout_constraintBottom_toBottomOf="@+id/weight_text"
+                app:layout_constraintEnd_toEndOf="@+id/height_text_box"
+                app:layout_constraintTop_toTopOf="@+id/weight_text" />
+
+            <EditText
+                android:id="@+id/age_text_box"
+                android:layout_width="232dp"
+                android:layout_height="24dp"
+                android:ems="10"
+                android:inputType="number"
+                app:layout_constraintBottom_toBottomOf="@+id/age_text"
+                app:layout_constraintEnd_toEndOf="@+id/weight_text_box"
+                app:layout_constraintTop_toTopOf="@+id/age_text" />
+
+            <TextView
+                android:id="@+id/acc_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/acc"
+                app:layout_constraintStart_toStartOf="@+id/emg_text"
+                app:layout_constraintTop_toBottomOf="@+id/emg_text" />
+
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="45dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/blank"
+                app:layout_constraintBottom_toBottomOf="@+id/battery_saver_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/battery_saver_text" />
+
+            <TextView
+                android:id="@+id/battery_saver_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/batterySaver"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/height_text_box"
+                android:layout_width="232dp"
+                android:layout_height="24dp"
+                android:ems="10"
+                android:inputType="number"
+                app:layout_constraintBottom_toBottomOf="@+id/height_text"
+                app:layout_constraintEnd_toEndOf="@+id/ecg_rate_spinner"
+                app:layout_constraintTop_toTopOf="@+id/height_text" />
+
+            <TextView
+                android:id="@+id/emg_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/emg"
+                app:layout_constraintStart_toStartOf="@+id/temp_text"
+                app:layout_constraintTop_toBottomOf="@+id/temp_text" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
