@@ -1,4 +1,4 @@
-package edu.wit.mobile_health.pillow_companion.ui.notifications;
+package edu.wit.mobile_health.pillow_companion.ui.settings;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

@@ -1,4 +1,4 @@
-package edu.wit.mobile_health.pillow_companion.ui.home;
+package edu.wit.mobile_health.pillow_companion.ui.insights;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

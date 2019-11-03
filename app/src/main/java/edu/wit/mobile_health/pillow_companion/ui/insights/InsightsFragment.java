@@ -1,30 +1,27 @@
-package edu.wit.mobile_health.pillow_companion.ui.notifications;
+package edu.wit.mobile_health.pillow_companion.ui.insights;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import edu.wit.mobile_health.pillow_companion.R;
 
-public class SettingsFragment extends Fragment {
+public class InsightsFragment extends Fragment {
 
-    private SettingsViewModel settingsViewModel;
+    private InsightsViewModel homeViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        settingsViewModel =
-                ViewModelProviders.of(this).get(SettingsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_settings, container, false);
-//        final TextView textView = root.findViewById(R.id.text_notifications);
-//        notificationsViewModel.getText().observe(this, new Observer<String>() {
+        homeViewModel =
+                ViewModelProviders.of(this).get(InsightsViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_insights, container, false);
+//        final TextView textView = root.findViewById(R.id.text_home);
+//        homeViewModel.getText().observe(this, new Observer<String>() {
 //            @Override
 //            public void onChanged(@Nullable String s) {
 //                textView.setText(s);

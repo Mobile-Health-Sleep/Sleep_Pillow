@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/battery_saver_switch"
+    android:id="@+id/settings_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -21,6 +21,7 @@
                 android:id="@+id/temp_rates_spinner"
                 android:layout_width="246dp"
                 android:layout_height="40dp"
+                android:entries="@array/Slow_Sample_Rates"
                 app:layout_constraintBottom_toBottomOf="@+id/temp_text"
                 app:layout_constraintEnd_toEndOf="@+id/light_rates_spinner"
                 app:layout_constraintTop_toTopOf="@+id/temp_text" />
@@ -47,6 +48,7 @@
                 android:id="@+id/light_rates_spinner"
                 android:layout_width="246dp"
                 android:layout_height="40dp"
+                android:entries="@array/Slow_Sample_Rates"
                 app:layout_constraintBottom_toBottomOf="@+id/light_text"
                 app:layout_constraintEnd_toEndOf="@+id/connections_reset_button"
                 app:layout_constraintTop_toTopOf="@+id/light_text" />
@@ -93,6 +95,7 @@
                 android:id="@+id/acc_rate_spinner"
                 android:layout_width="246dp"
                 android:layout_height="40dp"
+                android:entries="@array/Fast_Sample_Rates"
                 app:layout_constraintBottom_toBottomOf="@+id/acc_text"
                 app:layout_constraintEnd_toEndOf="@+id/emg_rates_spinner"
                 app:layout_constraintTop_toTopOf="@+id/acc_text" />
@@ -120,6 +123,7 @@
                 android:id="@+id/ecg_rate_spinner"
                 android:layout_width="246dp"
                 android:layout_height="40dp"
+                android:entries="@array/Slow_Sample_Rates"
                 app:layout_constraintBottom_toBottomOf="@+id/ecg_text"
                 app:layout_constraintEnd_toEndOf="@+id/acc_rate_spinner"
                 app:layout_constraintTop_toTopOf="@+id/ecg_text" />
@@ -128,6 +132,7 @@
                 android:id="@+id/emg_rates_spinner"
                 android:layout_width="246dp"
                 android:layout_height="40dp"
+                android:entries="@array/Fast_Sample_Rates"
                 app:layout_constraintBottom_toBottomOf="@+id/emg_text"
                 app:layout_constraintEnd_toEndOf="@+id/temp_rates_spinner"
                 app:layout_constraintTop_toTopOf="@+id/emg_text" />
@@ -180,7 +185,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/emg_text" />
 
             <Switch
-                android:id="@+id/switch1"
+                android:id="@+id/battery_saver_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="45dp"
@@ -195,7 +200,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/batterySaver"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -218,6 +223,14 @@
                 android:text="@string/emg"
                 app:layout_constraintStart_toStartOf="@+id/temp_text"
                 app:layout_constraintTop_toBottomOf="@+id/temp_text" />
+
+            <LinearLayout
+                android:id="@+id/white_space"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/age_text_box"></LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

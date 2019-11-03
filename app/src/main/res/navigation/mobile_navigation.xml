@@ -7,19 +7,34 @@
 
     <fragment
         android:id="@+id/navigation_insights"
-        android:name="edu.wit.mobile_health.pillow_companion.ui.home.InsightsFragment"
+        android:name="edu.wit.mobile_health.pillow_companion.ui.insights.InsightsFragment"
         android:label="@string/title_insights"
-        tools:layout="@layout/fragment_insights" />
+        tools:layout="@layout/fragment_insights" >
+        <action
+            android:id="@+id/action_navigation_insights_to_navigation_settings"
+            app:destination="@id/navigation_settings" />
+        <action
+            android:id="@+id/action_navigation_insights_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="edu.wit.mobile_health.pillow_companion.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_settings2"
+            app:destination="@id/navigation_settings" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="edu.wit.mobile_health.pillow_companion.ui.notifications.SettingsFragment"
+        android:name="edu.wit.mobile_health.pillow_companion.ui.settings.SettingsFragment"
         android:label="@string/title_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_navigation_settings_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
 </navigation>
