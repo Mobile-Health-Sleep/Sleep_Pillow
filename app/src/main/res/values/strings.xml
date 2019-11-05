@@ -20,4 +20,5 @@
     <string name="new_sleep">Start Recording</string>
     <string name="no_insights">There are currently no Insights. Start a sleep recording to gather data and gain insights on ways to improve your sleep.</string>
     <string name="No_Data">You currently have no data to display. Start a sleep recording to gather data and see your graphs.</string>
+    <string name="welcome">Welcome!</string>
 </resources>

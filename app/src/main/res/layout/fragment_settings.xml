@@ -49,6 +49,7 @@
                 android:layout_width="246dp"
                 android:layout_height="40dp"
                 android:entries="@array/Slow_Sample_Rates"
+                android:textColor="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="@+id/light_text"
                 app:layout_constraintEnd_toEndOf="@+id/connections_reset_button"
                 app:layout_constraintTop_toTopOf="@+id/light_text" />
