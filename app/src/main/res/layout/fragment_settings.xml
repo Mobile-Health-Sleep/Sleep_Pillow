@@ -225,13 +225,34 @@
                 app:layout_constraintStart_toStartOf="@+id/temp_text"
                 app:layout_constraintTop_toBottomOf="@+id/temp_text" />
 
+            <Button
+                android:id="@+id/reset_user"
+                android:layout_width="86dp"
+                android:layout_height="43dp"
+                android:text="@string/reset"
+                app:layout_constraintBottom_toBottomOf="@+id/reset_user_text"
+                app:layout_constraintEnd_toEndOf="@+id/age_text_box"
+                app:layout_constraintTop_toTopOf="@+id/reset_user_text" />
+
             <LinearLayout
                 android:id="@+id/white_space"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:layout_marginTop="48dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/age_text_box"></LinearLayout>
+                app:layout_constraintTop_toBottomOf="@+id/reset_user">
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/reset_user_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/reset_user"
+                app:layout_constraintStart_toStartOf="@+id/age_text"
+                app:layout_constraintTop_toBottomOf="@+id/age_text" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

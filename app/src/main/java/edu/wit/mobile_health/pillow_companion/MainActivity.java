@@ -2,11 +2,13 @@ package edu.wit.mobile_health.pillow_companion;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -18,7 +20,13 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import edu.wit.mobile_health.pillow_companion.user.User;
+
 public class MainActivity extends AppCompatActivity {
+
+    private User currentUser;
+
+    Button newSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +41,34 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        //Import bundle
+        Bundle bundle = this.getIntent().getExtras();
+
+        //Grab current user from bundle and export to json
+        currentUser = new User(bundle.getInt("height"), bundle.getInt("weight"), bundle.getInt("age"));
+        currentUser.exportToJson();
+
+
+        newSession = findViewById(R.id.new_sleep_button);
+
+        newSession.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, MonitorActivity.class );
+
+                Bundle bundle = new Bundle();
+                bundle.putInt("hour", 7);
+                bundle.putInt("min", 30);
+                bundle.putString("period", "AM");
+
+                intent.putExtras(bundle);
+
+                startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -60,6 +96,19 @@ public class MainActivity extends AppCompatActivity {
             InputMethodManager imm = (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(activity.getWindow().getDecorView().getWindowToken(), 0);
         }
+    }
+
+    public void resetUser(){
+        Intent intent = new Intent();
+        intent.setClass(MainActivity.this, UserDataActivity.class);
+
+        startActivity(intent);
+
+        finish();
+    }
+
+    public User getUser(){
+        return this.currentUser;
     }
 
 }
