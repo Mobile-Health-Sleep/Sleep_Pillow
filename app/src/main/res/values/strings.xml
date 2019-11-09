@@ -28,4 +28,5 @@
     <string name="logo_description">Sleep App Logo</string>
     <string name="next">Next</string>
     <string name="reset_user">Reset User</string>
+    <string name="date">Selected Date:</string>
 </resources>

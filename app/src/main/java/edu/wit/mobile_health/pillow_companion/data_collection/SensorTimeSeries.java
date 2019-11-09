@@ -1,15 +1,18 @@
 package edu.wit.mobile_health.pillow_companion.data_collection;
 
+import java.util.LinkedList;
 import java.util.List;
 
-public class Sensor<DataType> {
+public class SensorTimeSeries<DataType> {
 
-    private String sensor;
+    private String sensorType;
     private List<DataType> values;
     private List<Integer> timeStamps;
 
-    Sensor(String sensor){
-        this.sensor = sensor;
+    SensorTimeSeries(String sensor){
+        this.sensorType = sensor;
+        values = new LinkedList<>();
+        timeStamps = new LinkedList<>();
     }
 
     public void append(DataType value, int time){

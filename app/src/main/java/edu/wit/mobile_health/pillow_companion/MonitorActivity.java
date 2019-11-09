@@ -23,7 +23,7 @@ public class MonitorActivity extends AppCompatActivity {
         alarm = findViewById(R.id.alarm_time);
         done = findViewById(R.id.done_button);
 
-        alarm.setText(bundle.getInt("hour") + ":" + bundle.getInt("min") + " " + bundle.getString("period"));
+        alarm.setText(bundle.getInt("hour") + ":" + String.format("%02d", bundle.getInt("min")) + " " + bundle.getString("period"));
 
 
         done.setOnClickListener(new View.OnClickListener(){

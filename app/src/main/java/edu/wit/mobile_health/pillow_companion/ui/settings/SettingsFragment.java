@@ -1,10 +1,8 @@
 package edu.wit.mobile_health.pillow_companion.ui.settings;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +18,7 @@ import java.io.File;
 
 import edu.wit.mobile_health.pillow_companion.MainActivity;
 import edu.wit.mobile_health.pillow_companion.R;
-import edu.wit.mobile_health.pillow_companion.UserDataActivity;
 import edu.wit.mobile_health.pillow_companion.user.User;
-
-import static android.webkit.ConsoleMessage.MessageLevel.LOG;
 
 public class SettingsFragment extends Fragment {
     private MainActivity activity;
