@@ -12,8 +12,10 @@
 ## TODO Android
 - [X] Get rid of white space on top and fix scrolling (Carter)
 - [X] Fix text box click out of (Carter)
-- [ ] Implement Sleep Recording UI Page (Carter)
-- [ ] Implement Data calendar day picker (Carter)
+- [X] Implement Sleep Recording UI Page (Carter)
+- [X] Implement Data calendar day picker (Carter)
+- [ ] Implement Bluetooth Connection activity 
+- [X] Create alarm selection screen
 
 - [ ] Implement Graphing Library (Luke)
 - [ ] Create Data Structures for Sensor Data (Carter)
