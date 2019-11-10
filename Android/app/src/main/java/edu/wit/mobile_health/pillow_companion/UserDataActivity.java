@@ -84,7 +84,7 @@ public class UserDataActivity extends AppCompatActivity {
 
     private void loadMainActivity(int height, int weight, int age){
         Intent intent = new Intent();
-        intent.setClass(UserDataActivity.this, .class );
+        intent.setClass(UserDataActivity.this, MainActivity.class );
 
         Bundle bundle = new Bundle();
         bundle.putInt("height", height);
