@@ -6,12 +6,9 @@ Wentworth Institute of Technology taught by Professor Jones Yu. The intended pur
   create insights on steps to improve the quality of sleep and the difficulty of waking up.
 
 ## Links
-[How to use 18DB20 Temp Sensor](https://randomnerdtutorials.com/guide-for-ds18b20-temperature-sensor-with-arduino/)
-
 [Android Graphing Library](https://www.javaworld.com/article/3226733/graphlib-an-open-source-android-library-for-graphs.html)
 
-## TODO General
-- [ ] Create Data Transmission Protocol
+[aRest Library for bluetooth](https://github.com/marcoschwartz/aREST)
 
 ## TODO Arduino
 - [ ] Implement Data collection for temp sensor (Ben)
