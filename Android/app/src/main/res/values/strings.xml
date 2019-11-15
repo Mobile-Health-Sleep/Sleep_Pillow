@@ -29,4 +29,6 @@
     <string name="next">Next</string>
     <string name="reset_user">Reset User</string>
     <string name="date">Selected Date:</string>
+    <string name="bluetoothSearch">Searching For Bluetooth Device</string>
+    <string name="cancel">Cancel</string>
 </resources>
