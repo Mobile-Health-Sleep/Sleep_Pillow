@@ -14,13 +14,17 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import java.text.SimpleDateFormat;
+import com.github.mikephil.charting.charts.LineChart;
+
 import java.util.Calendar;
 //import java.util.Date;
 
 import edu.wit.mobile_health.pillow_companion.MainActivity;
 import edu.wit.mobile_health.pillow_companion.R;
 import edu.wit.mobile_health.pillow_companion.data_collection.Date;
+import edu.wit.mobile_health.pillow_companion.data_collection.DataGraph;
+import edu.wit.mobile_health.pillow_companion.data_collection.NightData;
+import edu.wit.mobile_health.pillow_companion.data_collection.SensorTimeSeries;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
@@ -30,7 +34,6 @@ public class DashboardFragment extends Fragment {
     private MainActivity activity;
 
     private Date selectedDate;
-
     private TextView date;
     private DatePicker dateView;
 
@@ -40,8 +43,9 @@ public class DashboardFragment extends Fragment {
                 ViewModelProviders.of(this).get(DashboardViewModel.class);
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-        activity = (MainActivity) getActivity();
+        initializeCharts(root);
 
+        activity = (MainActivity) getActivity();
         Calendar c = Calendar.getInstance();
         selectedDate = new Date(c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.YEAR));
 
@@ -95,6 +99,58 @@ public class DashboardFragment extends Fragment {
 
     public void updateDate(Date currentDate){
         date.setText(currentDate.toString());
+    }
+
+    
+    public void initializeCharts(View root) {
+        LineChart chart = root.findViewById(R.id.chart);
+        LineChart chart1 = root.findViewById(R.id.chart1);
+        LineChart chart2 = root.findViewById(R.id.chart2);
+        LineChart chart3 = root.findViewById(R.id.chart3);
+
+        DataGraph data = new DataGraph(chart, chart1, chart2, chart3);
+
+
+        data.addData(testData());
+    }
+    public NightData testData() {
+        NightData test = new NightData();
+        SensorTimeSeries tempTest = new SensorTimeSeries("Temp");
+        tempTest.append(1, 5);
+        tempTest.append(2, 5);
+        tempTest.append(3, 5);
+        tempTest.append(4, 5);
+        test.add(tempTest);
+
+        SensorTimeSeries ecgTest = new SensorTimeSeries("ECG");
+        ecgTest.append(1, 5);
+        ecgTest.append(2, 5);
+        ecgTest.append(3, 5);
+        ecgTest.append(4, 5);
+        test.add(ecgTest);
+
+        SensorTimeSeries emgTest = new SensorTimeSeries("EMG");
+        emgTest.append(1, 5);
+        emgTest.append(2, 5);
+        emgTest.append(3, 5);
+        emgTest.append(4, 5);
+        test.add(emgTest);
+
+        SensorTimeSeries lightTest = new SensorTimeSeries("Light");
+        lightTest.append(1, 5);
+        lightTest.append(2, 5);
+        lightTest.append(3, 5);
+        lightTest.append(4, 5);
+        test.add(lightTest);
+
+        SensorTimeSeries accelerometerTest = new SensorTimeSeries("Accelerometer");
+        accelerometerTest.append(1, 5);
+        accelerometerTest.append(2, 5);
+        accelerometerTest.append(3, 5);
+        accelerometerTest.append(4, 5);
+        test.add(accelerometerTest);
+
+        return test;
     }
 
 
