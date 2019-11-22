@@ -43,9 +43,10 @@ public class DashboardFragment extends Fragment {
                 ViewModelProviders.of(this).get(DashboardViewModel.class);
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-        initializeCharts(root);
+
 
         activity = (MainActivity) getActivity();
+        initializeCharts(root);
         Calendar c = Calendar.getInstance();
         selectedDate = new Date(c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.YEAR));
 

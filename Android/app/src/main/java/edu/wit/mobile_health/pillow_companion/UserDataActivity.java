@@ -30,8 +30,8 @@ public class UserDataActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        File userFile = new File("data/data/edu.wit.mobile_health.pillow_companion/files", "User.json");
 
+        File userFile = new File("data/data/edu.wit.mobile_health.pillow_companion/files", "User.json");
         if(userFile.exists()){
 
             //Load user info from json
@@ -55,7 +55,7 @@ public class UserDataActivity extends AppCompatActivity {
             }
 
         }else{
-            //Take user input from UI
+            userFile.mkdirs();
 
             setContentView(R.layout.activity_startup);
 
