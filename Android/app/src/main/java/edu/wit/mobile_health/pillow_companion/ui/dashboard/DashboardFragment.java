@@ -1,6 +1,7 @@
 package edu.wit.mobile_health.pillow_companion.ui.dashboard;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.github.mikephil.charting.charts.LineChart;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.Calendar;
 //import java.util.Date;
 
@@ -36,6 +39,7 @@ public class DashboardFragment extends Fragment {
     private Date selectedDate;
     private TextView date;
     private DatePicker dateView;
+    private DataGraph chartView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -43,15 +47,17 @@ public class DashboardFragment extends Fragment {
                 ViewModelProviders.of(this).get(DashboardViewModel.class);
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-
+        initializeCharts(root);
 
         activity = (MainActivity) getActivity();
-        initializeCharts(root);
+
         Calendar c = Calendar.getInstance();
         selectedDate = new Date(c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.YEAR));
 
         date = root.findViewById(R.id.date_display);
         updateDate(selectedDate);
+        //TODO Uncomment this when data collection is ready to go
+        //updateCharts();
 
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +93,8 @@ public class DashboardFragment extends Fragment {
                 selectedDate.setDay(i2);
                 selectedDate.setYear(i);
                 updateDate(selectedDate);
+                //TODO Uncomment this when data collection is ready
+                //updateCharts();
                 popupWindow.dismiss();
             }
         });
@@ -109,50 +117,48 @@ public class DashboardFragment extends Fragment {
         LineChart chart2 = root.findViewById(R.id.chart2);
         LineChart chart3 = root.findViewById(R.id.chart3);
 
-        DataGraph data = new DataGraph(chart, chart1, chart2, chart3);
-
-
-        data.addData(testData());
-    }
-    public NightData testData() {
-        NightData test = new NightData();
-        SensorTimeSeries tempTest = new SensorTimeSeries("Temp");
-        tempTest.append(1, 5);
-        tempTest.append(2, 5);
-        tempTest.append(3, 5);
-        tempTest.append(4, 5);
-        test.add(tempTest);
-
-        SensorTimeSeries ecgTest = new SensorTimeSeries("ECG");
-        ecgTest.append(1, 5);
-        ecgTest.append(2, 5);
-        ecgTest.append(3, 5);
-        ecgTest.append(4, 5);
-        test.add(ecgTest);
-
-        SensorTimeSeries emgTest = new SensorTimeSeries("EMG");
-        emgTest.append(1, 5);
-        emgTest.append(2, 5);
-        emgTest.append(3, 5);
-        emgTest.append(4, 5);
-        test.add(emgTest);
-
-        SensorTimeSeries lightTest = new SensorTimeSeries("Light");
-        lightTest.append(1, 5);
-        lightTest.append(2, 5);
-        lightTest.append(3, 5);
-        lightTest.append(4, 5);
-        test.add(lightTest);
-
-        SensorTimeSeries accelerometerTest = new SensorTimeSeries("Accelerometer");
-        accelerometerTest.append(1, 5);
-        accelerometerTest.append(2, 5);
-        accelerometerTest.append(3, 5);
-        accelerometerTest.append(4, 5);
-        test.add(accelerometerTest);
-
-        return test;
+        chartView = new DataGraph(chart, chart1, chart2, chart3);
     }
 
+    public void updateCharts() {
+        NightData night = createData();
+        chartView.addData(night);
+    }
+
+    private NightData createData() {
+        String currentDate = date.toString();
+        String filePath = String.format("data/data/edu.wit.mobile_health.pillow_companion/file/%s", currentDate);
+        NightData data = new NightData();
+        final String [] sensorNames = {"Temp","ECG","EMG","Light"};
+        for (String name: sensorNames) {
+            data.add(readDataFromFile(String.format("%s/%s", filePath, name), name));
+        }
+
+        return data;
+    }
+
+    private SensorTimeSeries readDataFromFile(String filePath, String sensorName) {
+        try {
+            SensorTimeSeries series = new SensorTimeSeries(sensorName);
+            BufferedReader br = new BufferedReader(new FileReader(filePath));
+
+            final String DELIMITER = ",";
+
+            String [] time = br.readLine().split(DELIMITER);
+            String [] data = br.readLine().split(DELIMITER);
+
+            for (int i = 1; i < time.length; i++) {
+                series.append(Integer.parseInt(time[i]), Integer.parseInt(data[i]));
+            }
+
+            return series;
+        }
+        catch(Exception ex) {
+            Log.v("DATA COLLECTION", "FILE COULD NOT BE FOUND");
+            return null;
+        }
+
+
+    }
 
 }

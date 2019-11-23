@@ -15,7 +15,7 @@ public class SensorTimeSeries {
         timeStamps = new LinkedList<>();
     }
 
-    public void append(Integer value, int time){
+    public void append(Integer value, Integer time){
         values.add(value);
         timeStamps.add(new Integer(time));
     }

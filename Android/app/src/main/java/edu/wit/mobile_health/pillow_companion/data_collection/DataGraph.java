@@ -18,7 +18,7 @@ public class DataGraph {
     private LineChart emgChart;
     private LineChart ecgChart;
     private LineChart lightChart;
-    private LineChart accelerChart;
+    //private LineChart accelerChart;
 
 
     public DataGraph(LineChart chart1, LineChart chart2, LineChart chart3, LineChart chart4) {
@@ -37,10 +37,10 @@ public class DataGraph {
      * Sets up the graphs with the data
      */
     public void addData(NightData data) {
-        tempChart.setData(createLineDataSet(data.getData("Temp")));
-        emgChart.setData(createLineDataSet(data.getData("EMG")));
-        ecgChart.setData(createLineDataSet(data.getData("ECG")));
-        lightChart.setData(createLineDataSet(data.getData("Light")));
+        tempChart.setData(createLineDataSet(data.getTempData()));
+        emgChart.setData(createLineDataSet(data.getEmgData()));
+        ecgChart.setData(createLineDataSet(data.getEcgData()));
+        lightChart.setData(createLineDataSet(data.getLightData()));
         //accelerChart.setData(createLineDataSet(data.getData("Accelerometer")));
 
     }

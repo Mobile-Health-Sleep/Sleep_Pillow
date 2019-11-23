@@ -4,17 +4,39 @@ import java.util.HashMap;
 
 public class NightData {
 
-    private HashMap<String,SensorTimeSeries> values;
+    private SensorTimeSeries tempSensor;
+    private SensorTimeSeries emgSensor;
+    private SensorTimeSeries ecgSensor;
+    private SensorTimeSeries lightSensor;
+
 
     public NightData() {
-        values = new HashMap<>();
+
     }
 
     public void add(SensorTimeSeries data) {
-        values.put(data.getSensor(), data);
+        switch (data.getSensor()) {
+            case "Temp":
+                tempSensor = data;
+            case "EMG":
+                emgSensor = data;
+            case "ECG":
+                ecgSensor = data;
+            case "lightSensor":
+                lightSensor = data;
+        }
     }
 
-    public SensorTimeSeries getData(String sensorName) {
-        return values.get(sensorName);
+    public SensorTimeSeries getTempData() {
+        return this.tempSensor;
+    }
+    public SensorTimeSeries getEmgData() {
+        return this.emgSensor;
+    }
+    public SensorTimeSeries getEcgData() {
+        return this.ecgSensor;
+    }
+    public SensorTimeSeries getLightData() {
+        return this.lightSensor;
     }
 }
