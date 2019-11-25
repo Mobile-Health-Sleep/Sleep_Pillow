@@ -50,7 +50,7 @@ public class ArduinoInterface extends Thread {
         c = Calendar.getInstance();
 
         directory = new File("data/data/edu.wit.mobile_health.pillow_companion/files",
-                (c.get(Calendar.MONTH) + "-" + c.get(Calendar.DAY_OF_MONTH) + "-" + c.get(Calendar.YEAR)));
+                ((c.get(Calendar.MONTH) + 1) + "-" + c.get(Calendar.DAY_OF_MONTH) + "-" + c.get(Calendar.YEAR)));
 
         if(!directory.exists()){
             directory.mkdir();

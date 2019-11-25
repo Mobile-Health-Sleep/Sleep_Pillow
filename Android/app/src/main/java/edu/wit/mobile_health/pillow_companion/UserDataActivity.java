@@ -30,6 +30,11 @@ public class UserDataActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        File dir = new File("data/data/edu.wit.mobile_health.pillow_companion/files");
+        if(!dir.exists()){
+            dir.mkdir();
+        }
+
 
         File userFile = new File("data/data/edu.wit.mobile_health.pillow_companion/files", "User.json");
         if(userFile.exists()){
@@ -55,7 +60,6 @@ public class UserDataActivity extends AppCompatActivity {
             }
 
         }else{
-            userFile.mkdirs();
 
             setContentView(R.layout.activity_startup);
 

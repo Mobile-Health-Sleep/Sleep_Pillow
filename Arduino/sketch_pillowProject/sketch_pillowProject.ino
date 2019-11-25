@@ -4,15 +4,9 @@
 #include "Adafruit_BLE_UART.h"
 #include <aREST.h>
 
-#define ADAFRUITBLE_REQ 10
-#define ADAFRUITBLE_RDY 2
-#define ADAFRUITBLE_RST 9
-
 aREST rest = aREST();
 
-Adafruit_BLE_UART BTLEserial = Adafruit_BLE_UART(ADAFRUITBLE_REQ, ADAFRUITBLE_RDY, ADAFRUITBLE_RST);
-
-const int MPU_addr=0x68;
+Adafruit_BLE_UART BTLEserial = Adafruit_BLE_UART(10, 2, 9);
 
 int accelX, accelY, accelZ;
 int temp = 0;
@@ -20,11 +14,13 @@ int light = 0;
 boolean vibrate = false;
 
 void setup() {
-  Serial.begin(9600);
   BTLEserial.begin();
 
   rest.variable("temp", &temp);
   rest.variable("light", &light);
+  rest.variable("accelX", &accelX);
+  rest.variable("accelY", &accelY);
+  rest.variable("accelZ", &accelZ);
 
   rest.set_id("001");
   rest.set_name("Pillow");
@@ -48,48 +44,12 @@ void loop() {
     vibration();
   }
 
-  /*
-  Serial.print("Temp = ");
-  Serial.println(temp);
-  Serial.print("Light = ");
-  Serial.println(light);
-
-  Serial.println();
-  Serial.println();
-  Serial.println();
-  */
-  
   if(status != laststatus){
-    //print it out
-    if(status == ACI_EVT_DEVICE_STARTED){
-      Serial.println(F("* Advertising started"));
-    }
-    
-    if(status == ACI_EVT_CONNECTED){
-      Serial.println(F("* Connected!"));
-    }
-    
-    if(status == ACI_EVT_DISCONNECTED){
-      Serial.println(F("* Disconnected or advertising timed out"));
-    }
-    
-    // Set the last status
     laststatus = status;
   }
   
   // Handle REST calls
   if(status == ACI_EVT_CONNECTED){
-//    if(BTLEserial.available()) {
-//      Serial.print("* ");
-//      Serial.print(BTLEserial.available());
-//      Serial.println(F(" bytes available from BTLE"));
-//    }
-//
-//    while(BTLEserial.available()) {
-//      char c = BTLEserial.read();
-//      Serial.print(c);
-//    }
-    
     rest.handle(BTLEserial);
   }
   delay(100);
