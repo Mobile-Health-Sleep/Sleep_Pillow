@@ -56,7 +56,6 @@ public class DashboardFragment extends Fragment {
 
         date = root.findViewById(R.id.date_display);
         updateDate(selectedDate);
-        //TODO Uncomment this when data collection is ready to go
         updateCharts();
 
         date.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +92,6 @@ public class DashboardFragment extends Fragment {
                 selectedDate.setDay(i2);
                 selectedDate.setYear(i);
                 updateDate(selectedDate);
-                //TODO Uncomment this when data collection is ready
                 updateCharts();
                 popupWindow.dismiss();
             }
@@ -126,12 +124,13 @@ public class DashboardFragment extends Fragment {
     }
 
     private NightData createData() {
-        String currentDate = ((selectedDate.getYear() + "-" + selectedDate.getMonth() + "-" + selectedDate.getDay()));
-        String filePath = String.format("data/data/edu.wit.mobile_health.pillow_companion/file/%s", currentDate);
+        String currentDate = ((selectedDate.getMonth() + "-" + selectedDate.getDay() + "-" + selectedDate.getYear()));
+        String filePath = String.format("data/data/edu.wit.mobile_health.pillow_companion/files/%s", currentDate);
         NightData data = new NightData();
-        final String [] sensorNames = {"Temp","ECG","EMG","Light"};
-        for (String name: sensorNames) {
-            data.add(readDataFromFile(String.format("%s/%s", filePath, name), name));
+        final String [] fileNames = {"temp.csv","ECG","EMG","light.csv"};
+        final String [] sensorNames = {"Temp", "ECG", "EMG", "Light"};
+        for (int i = 0; i < sensorNames.length; i++) {
+            data.add(readDataFromFile(String.format("%s/%s", filePath, fileNames[i]), sensorNames[i]));
         }
 
         return data;
@@ -140,6 +139,7 @@ public class DashboardFragment extends Fragment {
     private SensorTimeSeries readDataFromFile(String filePath, String sensorName) {
         try {
             SensorTimeSeries series = new SensorTimeSeries(sensorName);
+
             BufferedReader br = new BufferedReader(new FileReader(filePath));
 
             final String DELIMITER = ",";
@@ -150,11 +150,12 @@ public class DashboardFragment extends Fragment {
             for (int i = 1; i < time.length; i++) {
                 series.append(Integer.parseInt(time[i]), Integer.parseInt(data[i]));
             }
+            br.close();
 
             return series;
         }
         catch(Exception ex) {
-            Log.v("DATA COLLECTION", "FILE COULD NOT BE FOUND");
+            ex.printStackTrace();
             return null;
         }
 

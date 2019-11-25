@@ -1,6 +1,7 @@
 package edu.wit.mobile_health.pillow_companion.data_collection;
 
 import android.renderscript.Element;
+import android.util.Log;
 
 import androidx.annotation.IntegerRes;
 
@@ -38,11 +39,20 @@ public class DataGraph {
      */
     public void addData(NightData data) {
         tempChart.setData(createLineDataSet(data.getTempData()));
+        update(tempChart);
         emgChart.setData(createLineDataSet(data.getEmgData()));
+        update(emgChart);
         ecgChart.setData(createLineDataSet(data.getEcgData()));
+        update(ecgChart);
         lightChart.setData(createLineDataSet(data.getLightData()));
+        update(lightChart);
         //accelerChart.setData(createLineDataSet(data.getData("Accelerometer")));
 
+    }
+
+    private void update(LineChart chart) {
+        chart.notifyDataSetChanged();
+        chart.invalidate();
     }
 
     private LineData createLineDataSet(SensorTimeSeries series) {
@@ -50,10 +60,11 @@ public class DataGraph {
         if (series == null) {
             return null;
         }
-        List<Integer> x = series.getTimes();
+        List<Long> x = series.getTimes();
         List<Integer> y = series.getValues();
         for (int i = 0; i < x.size(); i++) {
-            entries.add(new Entry(x.get(i), y.get(i)));
+            Log.v("myAPP", "HERE");
+            entries.add(new Entry((float)x.get(i), y.get(i)));
         }
         LineDataSet dataSet = new LineDataSet(entries, String.format("%s Sensor Data", series.getSensor()));
 

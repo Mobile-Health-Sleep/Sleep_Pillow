@@ -16,16 +16,16 @@ public class NightData {
 
     public void add(SensorTimeSeries data) {
         if (data != null) {
-            switch (data.getSensor()) {
-                case "Temp":
+            String sensor = data.getSensor();
+                if (sensor.equals("Temp"))
                     tempSensor = data;
-                case "EMG":
+                else if (sensor.equals("EMG"))
                     emgSensor = data;
-                case "ECG":
+                else if (sensor.equals("ECG"))
                     ecgSensor = data;
-                case "lightSensor":
+                else if (sensor.equals("Light"))
                     lightSensor = data;
-            }
+
         }
 
     }
