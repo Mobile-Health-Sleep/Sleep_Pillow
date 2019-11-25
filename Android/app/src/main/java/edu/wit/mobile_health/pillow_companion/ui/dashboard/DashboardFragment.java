@@ -57,7 +57,7 @@ public class DashboardFragment extends Fragment {
         date = root.findViewById(R.id.date_display);
         updateDate(selectedDate);
         //TODO Uncomment this when data collection is ready to go
-        //updateCharts();
+        updateCharts();
 
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +94,7 @@ public class DashboardFragment extends Fragment {
                 selectedDate.setYear(i);
                 updateDate(selectedDate);
                 //TODO Uncomment this when data collection is ready
-                //updateCharts();
+                updateCharts();
                 popupWindow.dismiss();
             }
         });

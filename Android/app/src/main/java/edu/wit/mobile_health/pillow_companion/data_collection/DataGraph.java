@@ -47,7 +47,9 @@ public class DataGraph {
 
     private LineData createLineDataSet(SensorTimeSeries series) {
         ArrayList<Entry> entries = new ArrayList();
-
+        if (series == null) {
+            return null;
+        }
         List<Integer> x = series.getTimes();
         List<Integer> y = series.getValues();
         for (int i = 0; i < x.size(); i++) {

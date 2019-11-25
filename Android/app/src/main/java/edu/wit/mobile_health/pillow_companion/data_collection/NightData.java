@@ -15,16 +15,19 @@ public class NightData {
     }
 
     public void add(SensorTimeSeries data) {
-        switch (data.getSensor()) {
-            case "Temp":
-                tempSensor = data;
-            case "EMG":
-                emgSensor = data;
-            case "ECG":
-                ecgSensor = data;
-            case "lightSensor":
-                lightSensor = data;
+        if (data != null) {
+            switch (data.getSensor()) {
+                case "Temp":
+                    tempSensor = data;
+                case "EMG":
+                    emgSensor = data;
+                case "ECG":
+                    ecgSensor = data;
+                case "lightSensor":
+                    lightSensor = data;
+            }
         }
+
     }
 
     public SensorTimeSeries getTempData() {
