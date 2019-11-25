@@ -84,7 +84,7 @@ public class DashboardFragment extends Fragment {
 
         dateView = popupView.findViewById(R.id.datePicker);
 
-        dateView.updateDate(selectedDate.getYear(), selectedDate.getMonth()-1, selectedDate.getDay());
+        dateView.updateDate(selectedDate.getYear(), selectedDate.getMonth(), selectedDate.getDay());
 
         dateView.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
             @Override
@@ -126,7 +126,7 @@ public class DashboardFragment extends Fragment {
     }
 
     private NightData createData() {
-        String currentDate = date.toString();
+        String currentDate = ((selectedDate.getYear() + "-" + selectedDate.getMonth() + "-" + selectedDate.getDay()));
         String filePath = String.format("data/data/edu.wit.mobile_health.pillow_companion/file/%s", currentDate);
         NightData data = new NightData();
         final String [] sensorNames = {"Temp","ECG","EMG","Light"};
