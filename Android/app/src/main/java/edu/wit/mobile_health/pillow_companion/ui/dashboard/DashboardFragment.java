@@ -52,7 +52,7 @@ public class DashboardFragment extends Fragment {
         activity = (MainActivity) getActivity();
 
         Calendar c = Calendar.getInstance();
-        selectedDate = new Date(c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.YEAR));
+        selectedDate = new Date(c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.YEAR));
 
         date = root.findViewById(R.id.date_display);
         updateDate(selectedDate);
@@ -126,10 +126,10 @@ public class DashboardFragment extends Fragment {
     }
 
     private NightData createData() {
-        String currentDate = ((selectedDate.getYear() + "-" + selectedDate.getMonth() + "-" + selectedDate.getDay()));
-        String filePath = String.format("data/data/edu.wit.mobile_health.pillow_companion/file/%s", currentDate);
+        String currentDate = (((selectedDate.getMonth() + 1) + "-" + selectedDate.getDay() + "-" + selectedDate.getYear()));
+        String filePath = String.format("/data/data/edu.wit.mobile_health.pillow_companion/files/%s", currentDate);
         NightData data = new NightData();
-        final String [] sensorNames = {"Temp","ECG","EMG","Light"};
+        final String [] sensorNames = {"temp.csv","ECG.csv","EMG.csv","light.csv"};
         for (String name: sensorNames) {
             data.add(readDataFromFile(String.format("%s/%s", filePath, name), name));
         }
@@ -139,6 +139,7 @@ public class DashboardFragment extends Fragment {
 
     private SensorTimeSeries readDataFromFile(String filePath, String sensorName) {
         try {
+            Log.v("myApp", filePath);
             SensorTimeSeries series = new SensorTimeSeries(sensorName);
             BufferedReader br = new BufferedReader(new FileReader(filePath));
 
@@ -150,11 +151,12 @@ public class DashboardFragment extends Fragment {
             for (int i = 1; i < time.length; i++) {
                 series.append(Integer.parseInt(time[i]), Integer.parseInt(data[i]));
             }
-
+            br.close();
             return series;
         }
         catch(Exception ex) {
             Log.v("DATA COLLECTION", "FILE COULD NOT BE FOUND");
+            ex.printStackTrace();
             return null;
         }
 
