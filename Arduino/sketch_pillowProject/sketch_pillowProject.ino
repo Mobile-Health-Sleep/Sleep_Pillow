@@ -79,20 +79,20 @@ void loop() {
   
   // Handle REST calls
   if(status == ACI_EVT_CONNECTED){
-    if(BTLEserial.available()) {
-      Serial.print("* ");
-      Serial.print(BTLEserial.available());
-      Serial.println(F(" bytes available from BTLE"));
-    }
-
-    while(BTLEserial.available()) {
-      char c = BTLEserial.read();
-      Serial.print(c);
-    }
+//    if(BTLEserial.available()) {
+//      Serial.print("* ");
+//      Serial.print(BTLEserial.available());
+//      Serial.println(F(" bytes available from BTLE"));
+//    }
+//
+//    while(BTLEserial.available()) {
+//      char c = BTLEserial.read();
+//      Serial.print(c);
+//    }
     
     rest.handle(BTLEserial);
   }
-  delay(300);
+  delay(100);
 }
 
 

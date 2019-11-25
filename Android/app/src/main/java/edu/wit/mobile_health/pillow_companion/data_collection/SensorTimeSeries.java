@@ -41,8 +41,8 @@ public class SensorTimeSeries<Integer> {
         Iterator iterator = this.values.listIterator();
 
         while(iterator.hasNext()){
-            file.append(",");
             file.append(iterator.next().toString());
+            file.append(",");
         }
 
         file.append("\n");
@@ -50,8 +50,8 @@ public class SensorTimeSeries<Integer> {
         iterator = this.timeStamps.listIterator();
 
         while(iterator.hasNext()){
-            file.append(",");
             file.append(iterator.next().toString());
+            file.append(",");
         }
 
         file.append("\n");

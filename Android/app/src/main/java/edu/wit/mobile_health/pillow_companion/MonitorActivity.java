@@ -83,7 +83,7 @@ public class MonitorActivity extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                finish();
+                end();
             }
         });
 
@@ -154,6 +154,7 @@ public class MonitorActivity extends AppCompatActivity {
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
             super.onCharacteristicChanged(gatt, characteristic);
+
             String sensor = aInt.getCurrentSensor();
 
             aInt.appendData(sensor.trim(),Integer.parseInt(characteristic.getStringValue(0).trim()));
@@ -173,7 +174,7 @@ public class MonitorActivity extends AppCompatActivity {
                 Log.v("myApp", name);
             }catch(Exception e){
             }finally{
-                if(("pillow").equals(result.getDevice().getName())) {
+                if(("Pillow").equals(result.getDevice().getName())) {
                     Log.v("myApp", "FOUND");
                     gatt = result.getDevice().connectGatt(getApplicationContext(), false, callback);
                     Log.v("myApp", "CONNECTED");

@@ -76,8 +76,6 @@ public class ArduinoInterface extends Thread {
 
         while(collecting){
 
-            Log.v("myApp", "collecting");
-
             currentSensor="Temp";
             tx.setValue(("/temp /").getBytes(Charset.forName("UTF-8")));
             if(gatt.writeCharacteristic((tx))){
@@ -100,7 +98,7 @@ public class ArduinoInterface extends Thread {
                 }
             }
 
-            exportToCSV();
+
 
 //            tx.setValue(("/accelX").getBytes(Charset.forName("UTF-8")));
 //            if(gatt.writeCharacteristic((tx))){
@@ -141,7 +139,9 @@ public class ArduinoInterface extends Thread {
 
     public void stopCollecting(){
         this.collecting = false;
-        Log.v("myApp","FALSE");
+
+        exportToCSV();
+
     }
 
     public void appendData(String sensor, int value){
