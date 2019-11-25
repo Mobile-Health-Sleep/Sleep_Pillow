@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -17,6 +18,10 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +32,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.wit.mobile_health.pillow_companion.ui.dashboard.DashboardFragment;
 import edu.wit.mobile_health.pillow_companion.ui.popups.TimePickerFragment;
 import edu.wit.mobile_health.pillow_companion.user.User;
@@ -34,7 +42,6 @@ import edu.wit.mobile_health.pillow_companion.user.User;
 public class MainActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
 
     private User currentUser;
-
     private Button newSession;
     private TimePickerDialog timePicker;
 
@@ -58,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         //Grab current user from bundle and export to json
         currentUser = new User(bundle.getInt("height"), bundle.getInt("weight"), bundle.getInt("age"));
         currentUser.exportToJson();
-
 
         newSession = findViewById(R.id.new_sleep_button);
 

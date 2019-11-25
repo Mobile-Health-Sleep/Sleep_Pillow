@@ -14,13 +14,15 @@ public class SensorTimeSeries<Integer> {
     private List<Integer> values;
     private List<Long> timeStamps;
 
-    SensorTimeSeries(String sensor){
+
+    public SensorTimeSeries(String sensor){
         this.sensorType = sensor;
         values = new LinkedList<>();
         timeStamps = new LinkedList<>();
     }
 
     public void append(Integer value, long time){
+
         values.add(value);
         timeStamps.add(new Long(time));
     }
@@ -64,4 +66,6 @@ public class SensorTimeSeries<Integer> {
         }
 
     }
+    public String getSensor(){ return sensorType; }
+
 }
