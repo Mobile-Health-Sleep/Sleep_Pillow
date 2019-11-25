@@ -52,7 +52,7 @@ public class DashboardFragment extends Fragment {
         activity = (MainActivity) getActivity();
 
         Calendar c = Calendar.getInstance();
-        selectedDate = new Date(c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.YEAR));
+        selectedDate = new Date(c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.YEAR));
 
         date = root.findViewById(R.id.date_display);
         updateDate(selectedDate);
@@ -138,6 +138,7 @@ public class DashboardFragment extends Fragment {
 
     private SensorTimeSeries readDataFromFile(String filePath, String sensorName) {
         try {
+            Log.v("myApp", filePath);
             SensorTimeSeries series = new SensorTimeSeries(sensorName);
 
             BufferedReader br = new BufferedReader(new FileReader(filePath));
@@ -155,6 +156,7 @@ public class DashboardFragment extends Fragment {
             return series;
         }
         catch(Exception ex) {
+            Log.v("DATA COLLECTION", "FILE COULD NOT BE FOUND");
             ex.printStackTrace();
             return null;
         }
