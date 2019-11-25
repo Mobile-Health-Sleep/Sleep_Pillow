@@ -22,15 +22,24 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
-import java.util.Iterator;
-import java.util.List;
 import java.util.UUID;
 
+import edu.wit.mobile_health.pillow_companion.data_collection.ArduinoInterface;
 import edu.wit.mobile_health.pillow_companion.ui.popups.BluetoothSeachFragment;
-import edu.wit.mobile_health.pillow_companion.ui.popups.TimePickerFragment;
 
 
 public class MonitorActivity extends AppCompatActivity {
+    /**
+     * Arduino Variable names
+     *
+     * temp: int
+     * light: int
+     * accelX: int
+     * accelY: int
+     * accelZ: int
+     *
+     * vibrate: boolean
+     */
 
     private final static int REQUEST_ENABLE_BT = 1;
     private final static int REQUEST_ENABLE_GPS = 2;
@@ -52,6 +61,8 @@ public class MonitorActivity extends AppCompatActivity {
     private BluetoothGattCharacteristic rx;
 
     private DialogFragment bluetoothSearch;
+
+    private ArduinoInterface aInt;
 
     TextView alarm;
     Button done;
@@ -95,40 +106,65 @@ public class MonitorActivity extends AppCompatActivity {
         scanner = adapter.getBluetoothLeScanner();
 
         scanner.startScan(scanCallback);
-
-
-
-
     }
+
 
     private BluetoothGattCallback callback = new BluetoothGattCallback() {
         @Override
+        public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
+            super.onConnectionStateChange(gatt, status, newState);
+
+            if(newState == BluetoothGatt.STATE_CONNECTED){
+                Log.v("myApp", "GATT CONNECTED");
+
+                gatt.discoverServices();
+            }
+        }
+
+        @Override
         public void onServicesDiscovered(BluetoothGatt gatt, int status) {
+            Log.v("myApp", "Services Discovered");
             super.onServicesDiscovered(gatt, status);
 
-            // Save reference to each characteristic.
+            Log.v("myApp", gatt.getServices().toString());
+            Log.v("myApp", gatt.getService(UART_UUID).getCharacteristics().toString());
+
             tx = gatt.getService(UART_UUID).getCharacteristic(TX_UUID);
             rx = gatt.getService(UART_UUID).getCharacteristic(RX_UUID);
 
-            Log.v("BLE", "tx:" + tx);
-            Log.v("BLE", "rx:" + rx.getDescriptor(CLIENT_UUID));
 
-
+            if (!gatt.setCharacteristicNotification(rx, true)) {
+                Log.v("myApp", "Couldn't set notifications for RX characteristic!");
+            }
             // Next update the RX characteristic's client descriptor to enable notifications.
             if (rx.getDescriptor(CLIENT_UUID) != null) {
                 BluetoothGattDescriptor desc = rx.getDescriptor(CLIENT_UUID);
                 desc.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+                if (!gatt.writeDescriptor(desc)) {
+                    Log.v("myApp", "Couldn't write RX client descriptor value!");
+                }
+            } else {
+                Log.v("myApp", "Couldn't get RX client descriptor!");
             }
+
+            aInt = new ArduinoInterface(gatt, tx, rx);
+            aInt.start();
+        }
+
+        @Override
+        public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
+            super.onCharacteristicChanged(gatt, characteristic);
+            String sensor = aInt.getCurrentSensor();
+
+            aInt.appendData(sensor.trim(),Integer.parseInt(characteristic.getStringValue(0).trim()));
         }
     };
+
 
     private ScanCallback scanCallback = new ScanCallback() {
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
             super.onScanResult(callbackType, result);
-
-            Log.d("myApp", "Scan Result");
-            Log.d("myApp", result.getDevice().getAddress());
 
             String name = "";
 
@@ -136,19 +172,24 @@ public class MonitorActivity extends AppCompatActivity {
                 name = result.getDevice().getName();
                 Log.v("myApp", name);
             }catch(Exception e){
-                e.printStackTrace();
             }finally{
-                if(result.getDevice().getName() == "Group 4") {
+                if(("pillow").equals(result.getDevice().getName())) {
+                    Log.v("myApp", "FOUND");
                     gatt = result.getDevice().connectGatt(getApplicationContext(), false, callback);
+                    Log.v("myApp", "CONNECTED");
+
                     scanner.stopScan(scanCallback);
+
                     bluetoothSearch.dismiss();
                 }
             }
         }
     };
 
+
     public void end(){
-        scanner.stopScan(scanCallback);
+        aInt.stopCollecting();
+        gatt.close();
         finish();
     }
 }

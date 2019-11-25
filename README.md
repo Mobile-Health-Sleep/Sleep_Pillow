@@ -8,17 +8,9 @@ Wentworth Institute of Technology taught by Professor Jones Yu. The intended pur
 ## Links
 [Android Graphing Library](https://www.javaworld.com/article/3226733/graphlib-an-open-source-android-library-for-graphs.html)
 
-[aRest Library for bluetooth](https://github.com/marcoschwartz/aREST)
+[aRest Library for bluetooth](https://github.com/marcoschwartz/aREST#api-documentation)
 
-## TODO Arduino
-- [ ] Implement Data collection for temp sensor (Ben)
-
-
-## TODO Android
-- [ ] Implement Graphing Library
-- [ ] Create Data Structures for Sensor Data
-- [ ] Implement FitBit Data Collection 
-- [ ] Implement Arduino Data Collection
+[Accelerometer examples](https://learn.adafruit.com/adxl345-digital-accelerometer/programming)
 
 
 
