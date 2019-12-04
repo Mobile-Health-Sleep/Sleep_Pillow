@@ -27,9 +27,9 @@ public class InsightsFragment extends Fragment {
     private LinearLayout insights;
     private TextView noInsights;
 
-    private final int TEMPTHRESHOLDMIN = 100;
+    private final int TEMPTHRESHOLDMIN = 210;
     private final int TEMPTHRESHOLDMAX = 300;
-    private final int LIGHTTHRESHOLD = 100;
+    private final int LIGHTTHRESHOLD = 150;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -66,7 +66,8 @@ public class InsightsFragment extends Fragment {
     }
 
     private boolean checkTempsMin(int month, int day, int year){
-        SensorTimeSeries temps = readDataFromFile(String.format("data/data/edu.wit.mobile_health.pillow_companion/files/%d/%d/%d", month, day, year), "temp.csv");
+        Log.v("myApp", String.format("data/data/edu.wit.mobile_health.pillow_companion/files/%d-%d-%d/temp.csv", month, day, year));
+        SensorTimeSeries temps = readDataFromFile(String.format("data/data/edu.wit.mobile_health.pillow_companion/files/%d-%d-%d/temp.csv", month, day, year), "temp.csv");
         List<Integer> values = temps.getValues();
 
         Iterator<Integer> valueIterator = values.iterator();
@@ -81,7 +82,7 @@ public class InsightsFragment extends Fragment {
     }
 
     private boolean checkLight(int month, int day, int year){
-        SensorTimeSeries light = readDataFromFile(String.format("data/data/edu.wit.mobile_health.pillow_companion/files/%d/%d/%d", month, day, year), "light.csv");
+        SensorTimeSeries light = readDataFromFile(String.format("data/data/edu.wit.mobile_health.pillow_companion/files/%d-%d-%d/light.csv", month, day, year), "light");
         List<Integer> values = light.getValues();
 
         Iterator<Integer> valueIterator = values.iterator();
@@ -99,6 +100,8 @@ public class InsightsFragment extends Fragment {
 
     private void updateInsights(int month, int day, int year){
 
+        Log.v("myApp", (month + "/" + day + "/" +year));
+
         boolean tempsmin = false;
         boolean tempsmax = false;
         boolean light = false;
@@ -108,7 +111,7 @@ public class InsightsFragment extends Fragment {
             tempsmax = checkTempsMax(month, day, year);
             light = checkLight(month, day, year);
         }catch(Exception e){
-
+            e.printStackTrace();
         }
 
         this.insights.removeAllViews();
@@ -146,7 +149,7 @@ public class InsightsFragment extends Fragment {
         }
     }
 
-    //TODO: Refact this as part of the SensorTimeSeries class
+    //TODO: Refactor this as part of the SensorTimeSeries class
     private SensorTimeSeries readDataFromFile(String filePath, String sensorName) {
         try {
             Log.v("myApp", filePath);

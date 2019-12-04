@@ -20,7 +20,7 @@ public class BluetoothSeachFragment extends DialogFragment {
             public void onClick(DialogInterface dialog, int id) {
                 BluetoothSeachFragment.this.getDialog().cancel();
                 MonitorActivity parent = (MonitorActivity) getActivity();
-                parent.end();
+                parent.finish();
             }
         });
 
