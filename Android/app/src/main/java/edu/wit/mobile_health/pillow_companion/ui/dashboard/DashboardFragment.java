@@ -52,7 +52,7 @@ public class DashboardFragment extends Fragment {
         activity = (MainActivity) getActivity();
 
         Calendar c = Calendar.getInstance();
-        selectedDate = new Date(c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.YEAR));
+        selectedDate = new Date(c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.YEAR));
 
         date = root.findViewById(R.id.date_display);
         updateDate(selectedDate);
@@ -83,7 +83,7 @@ public class DashboardFragment extends Fragment {
 
         dateView = popupView.findViewById(R.id.datePicker);
 
-        dateView.updateDate(selectedDate.getYear(), selectedDate.getMonth(), selectedDate.getDay());
+        dateView.updateDate(selectedDate.getYear(), selectedDate.getMonth()-1, selectedDate.getDay());
 
         dateView.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
             @Override
