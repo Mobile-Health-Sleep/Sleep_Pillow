@@ -31,4 +31,8 @@
     <string name="date">Selected Date:</string>
     <string name="bluetoothSearch">Searching For Bluetooth Device</string>
     <string name="cancel">Cancel</string>
+    <string name="tempchart">Tempurature</string>
+    <string name="ecgchart">ECG</string>
+    <string name="emgchart">EMG</string>
+    <string name="lightchart">Light</string>
 </resources>
