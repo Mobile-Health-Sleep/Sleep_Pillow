@@ -51,7 +51,7 @@ public class InsightsFragment extends Fragment {
     //TODO: Add insights
 
     private boolean checkTempsMax(int month, int day, int year){
-        SensorTimeSeries temps = readDataFromFile(String.format("data/data/edu.wit.mobile_health.pillow_companion/files/%d/%d/%d", month, day, year), "temp.csv");
+        SensorTimeSeries temps = readDataFromFile(String.format("data/data/edu.wit.mobile_health.pillow_companion/files/%d-%d-%d/temp.csv", month, day, year), "temp");
         List<Integer> values = temps.getValues();
 
         Iterator<Integer> valueIterator = values.iterator();
@@ -67,7 +67,7 @@ public class InsightsFragment extends Fragment {
 
     private boolean checkTempsMin(int month, int day, int year){
         Log.v("myApp", String.format("data/data/edu.wit.mobile_health.pillow_companion/files/%d-%d-%d/temp.csv", month, day, year));
-        SensorTimeSeries temps = readDataFromFile(String.format("data/data/edu.wit.mobile_health.pillow_companion/files/%d-%d-%d/temp.csv", month, day, year), "temp.csv");
+        SensorTimeSeries temps = readDataFromFile(String.format("data/data/edu.wit.mobile_health.pillow_companion/files/%d-%d-%d/temp.csv", month, day, year), "temp");
         List<Integer> values = temps.getValues();
 
         Iterator<Integer> valueIterator = values.iterator();
